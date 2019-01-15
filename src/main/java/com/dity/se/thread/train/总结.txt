@@ -1,0 +1,10 @@
+synchronized 可以使线程获得锁后执行代码 其他线程必须等待该线程执行完才可以执行
+如果想让线程执行有先后顺序 如:三个线程依次输出ABC
+这里涉及线程的通信
+Object的wait/notify/notifyAll就是线程的通信 和synchronized绑定使用
+其中 wait方法表示该线程在等待 让该线程等待的临界条件必须用while 防止程序卡死
+可以用标记位区分哪个线程在执行代码 执行后修改标记位
+
+Lock 是可重入锁 作为synchronized的替代方式
+Lock可以 newCondition生成该线程的执行条件
+Condition的 await/signal/signalAll 替代Object的方法 和lock绑定使用
