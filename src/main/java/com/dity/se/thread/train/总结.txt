@@ -8,3 +8,5 @@ Object的wait/notify/notifyAll就是线程的通信 和synchronized绑定使用
 Lock 是可重入锁 作为synchronized的替代方式
 Lock可以 newCondition生成该线程的执行条件
 Condition的 await/signal/signalAll 替代Object的方法 和lock绑定使用
+可重入锁主要和synchronized的特性一样
+对于同一个对象的不同同步方法 是可重入的

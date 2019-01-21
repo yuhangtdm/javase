@@ -12,10 +12,10 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author:yuhang
  * @Date:2019/1/15
  */
-public class PrintABC2 {
+public class PrintABC3 {
 
     public static void main(String[] args) {
-        LockPrint lockPrint = new LockPrint();
+        OneLockPrint lockPrint = new OneLockPrint();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -43,12 +43,12 @@ public class PrintABC2 {
     }
 
 }
-class LockPrint{
+
+class OneLockPrint{
     private Lock  lock =new ReentrantLock();
     private int flag = 1;
+    // 只有一个条件
     private Condition lock1 = lock.newCondition();
-    private Condition lock2 = lock.newCondition();
-    private Condition lock3 = lock.newCondition();
 
     public void printA(int i){
         try {
@@ -62,7 +62,7 @@ class LockPrint{
             }
             flag=2;
             System.out.print("A");
-            lock2.signal();
+            lock1.signal();
         }finally {
             lock.unlock();
         }
@@ -73,14 +73,14 @@ class LockPrint{
             lock.lock();
             if (flag!=2){
                 try {
-                    lock2.await();
+                    lock1.await();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
             flag=3;
             System.out.print("B");
-            lock3.signal();
+            lock1.signal();
         }finally {
             lock.unlock();
         }
@@ -91,7 +91,7 @@ class LockPrint{
             lock.lock();
             if (flag!=3){
                 try {
-                    lock3.await();
+                    lock1.await();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
