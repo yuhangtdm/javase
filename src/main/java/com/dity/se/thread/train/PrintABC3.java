@@ -47,13 +47,14 @@ public class PrintABC3 {
 class OneLockPrint{
     private Lock  lock =new ReentrantLock();
     private int flag = 1;
-    // 只有一个条件
+    // 只有一个条件 就不能保证ABC执行的顺序
+    // 但是当把if换成while时即可保证ABC的执行顺序 原因是if只判断一次 while会判断多次
     private Condition lock1 = lock.newCondition();
 
     public void printA(int i){
         try {
             lock.lock();
-            if (flag!=1){
+            while (flag!=1){
                 try {
                     lock1.await();
                 } catch (InterruptedException e) {
@@ -71,7 +72,7 @@ class OneLockPrint{
     public void printB(int i){
         try {
             lock.lock();
-            if (flag!=2){
+            while (flag!=2){
                 try {
                     lock1.await();
                 } catch (InterruptedException e) {
@@ -89,7 +90,7 @@ class OneLockPrint{
     public void printC(int i){
         try {
             lock.lock();
-            if (flag!=3){
+            while (flag!=3){
                 try {
                     lock1.await();
                 } catch (InterruptedException e) {

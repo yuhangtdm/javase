@@ -46,6 +46,10 @@ public class PrintABC2 {
 class LockPrint{
     private Lock  lock =new ReentrantLock();
     private int flag = 1;
+    /**
+     * 此处三个条件交替执行可以保证ABC的执行
+     * 主要是可以唤醒对应的线程 而不是随机唤醒一个线程
+     */
     private Condition lock1 = lock.newCondition();
     private Condition lock2 = lock.newCondition();
     private Condition lock3 = lock.newCondition();
