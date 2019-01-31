@@ -67,6 +67,10 @@ public class TestNonBlockingNIO {
         serverChannel.close();
     }
 
+    /**
+     * 当有多个 不停的执行 不停的等待 能不能想起 while(true){} 为什么每一次都想不起来？？？？？？？？
+     * @throws IOException
+     */
     public static void server2() throws IOException {
         ServerSocketChannel serverChannel = ServerSocketChannel.open();
         serverChannel.bind(new InetSocketAddress("127.0.0.1",9898));
@@ -78,6 +82,7 @@ public class TestNonBlockingNIO {
 
         serverChannel.register(selector, SelectionKey.OP_ACCEPT);
 
+        // selector.select() 阻塞
         while (selector.select()>0){
 
             Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
