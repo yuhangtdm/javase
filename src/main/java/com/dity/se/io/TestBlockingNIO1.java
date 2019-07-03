@@ -82,13 +82,13 @@ public class TestBlockingNIO1 {
 //        ServerSocketChannel channel = ss.getChannel();
 
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
-        FileChannel outChannel = FileChannel.open(Paths.get("3.txt"), StandardOpenOption.WRITE, StandardOpenOption.CREATE);
+        final FileChannel outChannel = FileChannel.open(Paths.get("3.txt"), StandardOpenOption.WRITE, StandardOpenOption.CREATE);
 
         serverSocketChannel.bind(new InetSocketAddress(9999));
         System.out.println("server started");
         // 阻塞模式时 accept()是阻塞的方法 没接收到客户端的请求 一直阻塞在这 接收到一个客户端 就需要启动一个线程来执行
         // 如果不启动线程的话 就需要一个客户端执行完 另一个客户端才能执行 阻塞模式下 只能连接一个客户端
-        SocketChannel socketChannel = serverSocketChannel.accept();
+        final SocketChannel socketChannel = serverSocketChannel.accept();
         new Thread(new Runnable() {
             @Override
             public void run() {

@@ -15,7 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class PrintABC3 {
 
     public static void main(String[] args) {
-        OneLockPrint lockPrint = new OneLockPrint();
+        final OneLockPrint lockPrint = new OneLockPrint();
         new Thread(new Runnable() {
             @Override
             public void run() {

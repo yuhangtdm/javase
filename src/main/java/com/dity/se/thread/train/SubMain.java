@@ -9,7 +9,7 @@ package com.dity.se.thread.train;
 public class SubMain {
     private int flag = 1;
     public static void main(String[] args) {
-        SubMain subMain = new SubMain();
+        final SubMain subMain = new SubMain();
         new Thread(new Runnable() {
             @Override
             public void run() {

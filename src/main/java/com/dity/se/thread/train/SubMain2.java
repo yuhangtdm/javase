@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class SubMain2 {
     public static void main(String[] args) {
-        Business business = new Business();
+        final Business business = new Business();
         new Thread(new Runnable() {
             @Override
             public void run() {

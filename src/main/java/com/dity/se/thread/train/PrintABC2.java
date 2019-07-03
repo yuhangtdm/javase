@@ -15,7 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class PrintABC2 {
 
     public static void main(String[] args) {
-        LockPrint lockPrint = new LockPrint();
+        final LockPrint lockPrint = new LockPrint();
         new Thread(new Runnable() {
             @Override
             public void run() {
